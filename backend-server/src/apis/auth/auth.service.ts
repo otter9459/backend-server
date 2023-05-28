@@ -66,8 +66,7 @@ export class AuthService {
     }
 
     this.setRefreshToken({ user, res });
-    // front-end 도메인 확인 후 수정
-    res.redirect('http://localhost:5500/');
+    res.redirect('https://cumadi.site');
   }
 
   async logout({ context }) {
@@ -143,12 +142,11 @@ export class AuthService {
       { secret: process.env.JWT_REFRESH_KEY, expiresIn: '2w' },
     );
 
-    // front-end 도메인, back-end 도메인 확인 후 옵션 추가 및 수정
     res.setHeader(
       'set-Cookie',
       `refreshToken=${refreshToken}; path=/; SameSite=None; Secure; httpOnly;`,
     );
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost');
+    res.setHeader('Access-Control-Allow-Origin', 'https://cumadi.site');
   }
 
   getAccessToken({ user }: IAuthServiceGetAccessToken): string {
